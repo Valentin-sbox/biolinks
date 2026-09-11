@@ -1,660 +1,411 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>lyink</title>
-  <meta name="description" content="">
-  <meta property="og:title" content="">
-  <meta property="og:description" content="">
-  <meta property="og:type" content="website">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentin SBX</title>
+  <meta name="description" content="Dev · Dibujo · Escribo xd">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --radius: 16px;
-      --bg-card: rgba(255, 255, 255, 0.08);
-      --bg-card-hover: rgba(255, 255, 255, 0.14);
-      --border-card: rgba(255, 255, 255, 0.12);
-      --border-card-hover: rgba(255, 255, 255, 0.22);
-      --blur: 24px;
-      --text: #fff;
-      --text-secondary: rgba(255, 255, 255, 0.4);
-      --shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      --radius: 12px;
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --surface-2: #1a1a1a;
+      --border: #222222;
+      --border-hover: #333333;
+      --text: #f5f5f5;
+      --text-2: #888888;
+      --text-3: #555555;
+      --accent: #8b5cf6;
     }
 
-    body {
+    html, body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #000;
+      background: var(--bg);
       color: var(--text);
       min-height: 100vh;
-      min-height: 100dvh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+    /* ===== LAYOUT ===== */
+    .app {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      min-height: 100vh;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .main {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      overflow-x: hidden;
-    }
-
-    /* RTL */
-    html[dir="rtl"] .link-btn { flex-direction: row-reverse; }
-    html[dir="rtl"] .link-text { text-align: right; }
-    html[dir="rtl"] .link-arrow svg { transform: rotate(180deg); }
-    html[dir="rtl"] .link-btn:hover .link-arrow { transform: translateX(-3px); }
-
-    /* Background */
-    .bg-media {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      z-index: -2;
-    }
-    .bg-overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.55);
-      z-index: -1;
-    }
-    .bg-color {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -2;
-    }
-
-    /* Container */
-    .container {
-      width: 100%;
-      max-width: 440px;
-      padding: 20px 20px 24px;
-      position: relative;
-      z-index: 1;
+      gap: 20px;
     }
 
     /* Profile */
     .profile {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      margin-bottom: 10px;
+      gap: 16px;
     }
     .avatar {
-      width: 160px;
-      margin-bottom: 12px;
-      animation: fadeInDown 0.6s ease-out;
+      width: 72px;
+      height: 72px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      flex-shrink: 0;
     }
     .avatar img {
       width: 100%;
-      height: auto;
-      border-radius: var(--avatar-radius, 0);
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
+    .profile-info { flex: 1; min-width: 0; }
     .profile-name {
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 700;
+      letter-spacing: -0.3px;
       margin-bottom: 4px;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-      animation: fadeInDown 0.6s ease-out 0.1s both;
     }
     .profile-bio {
       font-size: 14px;
-      color: var(--text-secondary);
-      text-align: center;
-      max-width: 300px;
-      animation: fadeInDown 0.6s ease-out 0.15s both;
+      color: var(--text-2);
     }
 
-    /* Links */
-    .links {
+    /* Filters */
+    .filters {
       display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 12px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
-    .link-btn {
+    .filter {
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-2);
+      background: transparent;
+      transition: all 0.15s;
+    }
+    .filter:hover {
+      border-color: var(--border-hover);
+      color: var(--text);
+    }
+    .filter.active {
+      border-color: var(--accent);
+      color: var(--text);
+      background: rgba(139, 92, 246, 0.1);
+    }
+
+    /* Links grid */
+    .links {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .link {
       display: flex;
       align-items: center;
       gap: 12px;
-      width: 100%;
-      padding: 12px 14px;
-      background: var(--bg-card);
-      backdrop-filter: blur(var(--blur)) saturate(1.4);
-      -webkit-backdrop-filter: blur(var(--blur)) saturate(1.4);
-      border: 1px solid var(--border-card);
+      padding: 14px;
+      border: 1px solid var(--border);
       border-radius: var(--radius);
-      text-decoration: none;
-      color: var(--text);
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
+      background: var(--surface);
+      transition: all 0.15s;
     }
-    .link-btn:hover {
-      background: var(--bg-card-hover);
-      border-color: var(--border-card-hover);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
+    .link:hover {
+      border-color: var(--border-hover);
+      background: var(--surface-2);
     }
-    .link-btn:active { transform: scale(0.98); }
-
     .link-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 9px;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
     }
-    .link-icon svg { width: 20px; height: 20px; }
-    .link-text {
-      flex: 1;
-      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-    }
-    .link-arrow {
-      color: rgba(255, 255, 255, 0.35);
-      transition: transform 0.2s, color 0.2s;
-    }
-    .link-btn:hover .link-arrow {
-      transform: translateX(3px);
-      color: rgba(255, 255, 255, 0.6);
-    }
-    .link-arrow svg { width: 16px; height: 16px; }
-
-    /* Divider */
-    .divider {
-      width: 40px;
-      height: 1px;
-      background: rgba(255, 255, 255, 0.12);
-      margin: 0 auto 10px;
-    }
-
-    /* Section Title */
-    .section-title {
-      font-size: 11px;
+    .link-info { flex: 1; min-width: 0; }
+    .link-title {
+      font-size: 14px;
       font-weight: 600;
-      letter-spacing: 2px;
-      color: var(--text-secondary);
-      text-transform: uppercase;
-      text-align: center;
-      margin-bottom: 10px;
+      margin-bottom: 2px;
+    }
+    .link-url {
+      font-size: 11px;
+      color: var(--text-3);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    /* Catalog Grid */
-    .catalog-grid {
-      display: grid;
-      gap: 8px;
-      margin-bottom: 16px;
+    /* Highlighted (sorted first) */
+    .link.highlight {
+      border-color: rgba(139, 92, 246, 0.4);
     }
-    .catalog-card {
+    .link.highlight .link-icon {
+      border-color: rgba(139, 92, 246, 0.4);
+      color: var(--accent);
+    }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      padding: 14px 10px;
-      background: rgba(255, 255, 255, 0.06);
-      backdrop-filter: blur(20px) saturate(1.3);
-      -webkit-backdrop-filter: blur(20px) saturate(1.3);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 14px;
-      text-decoration: none;
-      color: var(--text);
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      gap: 24px;
+      padding-left: 24px;
+      border-left: 1px solid var(--border);
+      height: fit-content;
     }
-    .catalog-card:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.25);
-      transform: translateY(-2px);
-    }
-    .catalog-card:active { transform: scale(0.96); }
-    .catalog-card-icon {
-      width: 30px;
-      height: 30px;
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text);
-    }
-    .catalog-card-icon svg { width: 15px; height: 15px; }
-    .catalog-card-name {
-      font-size: 12px;
+    .nav-group { display: flex; flex-direction: column; gap: 4px; }
+    .nav-title {
+      font-size: 11px;
       font-weight: 600;
-      text-transform: capitalize;
-      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 6px;
     }
-    .catalog-card-count {
-      font-size: 10px;
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
-
-    /* Theme: solid */
-    .theme-solid .link-btn {
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-      background: rgba(30, 30, 30, 0.95);
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-    .theme-solid .link-btn:hover {
-      background: rgba(50, 50, 50, 0.95);
-    }
-    .theme-solid .catalog-card {
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-      background: rgba(30, 30, 30, 0.95);
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    /* Theme: minimal */
-    .theme-minimal .link-btn {
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-      background: transparent;
-      border: none;
-      padding: 10px 4px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      border-radius: 0;
-    }
-    .theme-minimal .link-btn:hover {
-      background: transparent;
-      box-shadow: none;
-      border-color: rgba(255,255,255,0.2);
-    }
-    .theme-minimal .catalog-card {
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-      background: transparent;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-
-    /* Animations */
-    .animate-in {
-      opacity: 0;
-      animation: fadeInUp 0.5s ease-out forwards;
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @supports (padding-bottom: env(safe-area-inset-bottom)) {
-      .container { padding-bottom: calc(40px + env(safe-area-inset-bottom)); }
-    }
-
-    /* Loading state */
-    .loading {
+    .nav-item {
       display: flex;
       align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      color: var(--text-secondary);
-      font-size: 14px;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-2);
+      transition: all 0.15s;
+      text-align: left;
+      width: 100%;
+    }
+    .nav-item:hover {
+      background: var(--surface);
+      color: var(--text);
+    }
+    .nav-item.active {
+      background: var(--surface);
+      color: var(--text);
+    }
+    .nav-item .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text-3);
+      flex-shrink: 0;
+    }
+    .nav-item.active .dot { background: var(--accent); }
+    .nav-item .label { flex: 1; }
+    .nav-item .badge {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--surface-2);
+      color: var(--text-3);
+      border: 1px solid var(--border);
+    }
+    .nav-item .badge.warn {
+      color: #f59e0b;
+      border-color: rgba(245, 158, 11, 0.3);
+      background: rgba(245, 158, 11, 0.08);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 780px) {
+      .app {
+        grid-template-columns: 1fr;
+        padding: 20px 16px;
+        gap: 20px;
+      }
+      .sidebar {
+        padding-left: 0;
+        border-left: none;
+        border-top: 1px solid var(--border);
+        padding-top: 20px;
+        order: -1;
+      }
+      .links { grid-template-columns: 1fr; }
+      .avatar { width: 60px; height: 60px; }
+      .profile-name { font-size: 19px; }
+    }
+
+    @media (max-width: 400px) {
+      .app { padding: 16px 12px; }
+      .link { padding: 12px; }
+      .link-icon { width: 32px; height: 32px; font-size: 14px; }
     }
   </style>
 </head>
 <body>
-  <div class="loading" id="loading">Loading...</div>
 
-  <script>
-    const ICON_COLORS = {
-      whatsapp: '#25D366',
-      instagram: '#E1306C',
-      telegram: '#0088cc',
-      twitter: '#000',
-      github: '#fff',
-      linkedin: '#0A66C2',
-      youtube: '#FF0000',
-      tiktok: '#000',
-      discord: '#5865F2',
-      spotify: '#1DB954',
-      email: '#EA4335',
-      website: '#ef4444',
-      phone: '#25D366',
-      location: '#FF6B6B',
-      send: '#25D366',
-      image: '#25D366',
-      link: '#8B5CF6',
-      threads: '#000',
-      snapchat: '#FFFC00'
-    };
+<div class="app">
 
-    const ICON_BG = {
-      whatsapp: 'rgba(37, 211, 102, 0.2)',
-      instagram: 'linear-gradient(135deg, rgba(131, 58, 180, 0.2), rgba(253, 29, 29, 0.2))',
-      telegram: 'rgba(0, 136, 204, 0.2)',
-      twitter: 'rgba(255, 255, 255, 0.1)',
-      github: 'rgba(255, 255, 255, 0.1)',
-      linkedin: 'rgba(10, 102, 194, 0.2)',
-      youtube: 'rgba(255, 0, 0, 0.2)',
-      tiktok: 'rgba(255, 255, 255, 0.1)',
-      discord: 'rgba(88, 101, 242, 0.2)',
-      spotify: 'rgba(29, 185, 84, 0.2)',
-      email: 'rgba(234, 67, 53, 0.2)',
-      website: 'rgba(220, 38, 38, 0.2)',
-      phone: 'rgba(37, 211, 102, 0.2)',
-      location: 'rgba(255, 107, 107, 0.2)',
-      send: 'rgba(37, 211, 102, 0.15)',
-      image: 'rgba(37, 211, 102, 0.15)',
-      link: 'rgba(139, 92, 246, 0.2)',
-      threads: 'rgba(255, 255, 255, 0.1)',
-      snapchat: 'rgba(255, 252, 0, 0.2)'
-    };
+  <!-- ===== MAIN ===== -->
+  <main class="main">
 
-    const HOVER_BORDERS = {
-      whatsapp: 'rgba(37, 211, 102, 0.35)',
-      instagram: 'rgba(225, 48, 108, 0.35)',
-      telegram: 'rgba(0, 136, 204, 0.35)',
-      twitter: 'rgba(255, 255, 255, 0.25)',
-      github: 'rgba(255, 255, 255, 0.25)',
-      linkedin: 'rgba(10, 102, 194, 0.35)',
-      youtube: 'rgba(255, 0, 0, 0.35)',
-      tiktok: 'rgba(255, 255, 255, 0.25)',
-      discord: 'rgba(88, 101, 242, 0.35)',
-      spotify: 'rgba(29, 185, 84, 0.35)',
-      email: 'rgba(234, 67, 53, 0.35)',
-      website: 'rgba(220, 38, 38, 0.35)',
-      phone: 'rgba(37, 211, 102, 0.35)',
-      location: 'rgba(255, 107, 107, 0.35)',
-      link: 'rgba(139, 92, 246, 0.35)',
-      threads: 'rgba(255, 255, 255, 0.25)',
-      snapchat: 'rgba(255, 252, 0, 0.35)'
-    };
+    <!-- Profile -->
+    <div class="profile">
+      <div class="avatar">
+        <img src="https://github.com/Valentin-sbox.png" alt="Valentin SBX" id="avatar">
+      </div>
+      <div class="profile-info">
+        <div class="profile-name" id="name">Valentin SBX</div>
+        <div class="profile-bio" id="bio">Dev · Dibujo · Escribo xd</div>
+      </div>
+    </div>
 
-    const ARROW_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>';
+    <!-- Filters -->
+    <div class="filters" id="filters">
+      <button class="filter active" data-filter="all">Todos</button>
+      <button class="filter" data-filter="stack">Stack</button>
+      <button class="filter" data-filter="escritor">Escritor</button>
+      <button class="filter" data-filter="art">Art Worker</button>
+    </div>
 
-    let iconsLoaded = false;
-    let iconsDoc = null;
+    <!-- Links -->
+    <div class="links" id="links"></div>
 
-    async function loadIcons() {
-      try {
-        const res = await fetch('icons.svg');
-        const text = await res.text();
-        const parser = new DOMParser();
-        iconsDoc = parser.parseFromString(text, 'image/svg+xml');
-        iconsLoaded = true;
-      } catch (e) {
-        console.warn('Could not load icons.svg:', e);
-      }
-    }
+  </main>
 
-    function getIconSVG(name) {
-      if (!iconsLoaded || !iconsDoc) return '';
-      const symbol = iconsDoc.querySelector('#icon-' + name);
-      if (!symbol) return '';
-      const viewBox = symbol.getAttribute('viewBox') || '0 0 24 24';
-      return '<svg viewBox="' + viewBox + '">' + symbol.innerHTML + '</svg>';
-    }
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar">
 
-    function detectLang(config) {
-      if (!config.i18n || !config.i18n.enabled) return null;
-      const lang = (navigator.language || navigator.userLanguage || config.i18n.default || 'en').slice(0, 2).toLowerCase();
-      if (config.i18n.translations && config.i18n.translations[lang]) return lang;
-      return config.i18n.default || null;
-    }
+    <div class="nav-group">
+      <div class="nav-title">Inicio</div>
+      <button class="nav-item active">
+        <span class="dot"></span>
+        <span class="label">Inicio</span>
+      </button>
+      <button class="nav-item">
+        <span class="dot"></span>
+        <span class="label">Redes sociales</span>
+      </button>
+    </div>
 
-    function t(text, config, lang) {
-      if (!lang || !config.i18n || !config.i18n.translations) return text;
-      const tr = config.i18n.translations[lang];
-      return (tr && tr[text]) || text;
-    }
+    <div class="nav-group">
+      <div class="nav-title">Mis proyectos</div>
+      <button class="nav-item">
+        <span class="dot"></span>
+        <span class="label">Bloopy</span>
+        <span class="badge">JS</span>
+      </button>
+      <button class="nav-item">
+        <span class="dot"></span>
+        <span class="label">Biolinks</span>
+        <span class="badge">Web</span>
+      </button>
+      <button class="nav-item">
+        <span class="dot"></span>
+        <span class="label">Próximamente</span>
+        <span class="badge warn">Mantenimiento</span>
+      </button>
+    </div>
 
-    function renderBackground(bg) {
-      if (!bg) return;
+  </aside>
 
-      if (bg.type === 'image' && bg.src) {
-        const img = document.createElement('img');
-        img.className = 'bg-media';
-        img.src = bg.src;
-        img.alt = '';
-        img.loading = 'eager';
-        document.body.prepend(img);
+</div>
 
-        const overlay = document.createElement('div');
-        overlay.className = 'bg-overlay';
-        overlay.style.background = 'rgba(0, 0, 0, ' + (bg.overlay ?? 0.55) + ')';
-        img.after(overlay);
-      } else if (bg.type === 'color' && bg.color) {
-        const div = document.createElement('div');
-        div.className = 'bg-color';
-        div.style.background = bg.color;
-        document.body.prepend(div);
-      } else if (bg.type === 'gradient' && bg.gradient) {
-        const div = document.createElement('div');
-        div.className = 'bg-color';
-        div.style.background = bg.gradient;
-        document.body.prepend(div);
-      }
-    }
+<script>
+  // ===== CONFIG =====
+  const config = {
+    name: "Valentin SBX",
+    bio: "Dev · Dibujo · Escribo xd",
+    avatar: "https://github.com/Valentin-sbox.png",
+    links: [
+      { name: "Pixiv", url: "https://www.pixiv.net/en/users/91075371", tags: ["art"], icon: "Pi" },
+      { name: "Instagram", url: "https://www.instagram.com/valentinhere1/", tags: ["art"], icon: "Ig" },
+      { name: "ArtStation", url: "https://valentinhere.artstation.com", tags: ["art"], icon: "As" },
+      { name: "GitHub", url: "https://github.com/Valentin-sbox", tags: ["stack"], icon: "Gh" },
+      { name: "Discord", url: "https://discord.gg/tu-invitacion", tags: ["stack"], icon: "Dc" },
+      { name: "Patreon", url: "https://patreon.com/tu-usuario", tags: ["art"], icon: "Pa" }
+    ]
+  };
 
-    function renderProfile(config, lang) {
-      const profile = document.createElement('div');
-      profile.className = 'profile';
+  // ===== RENDER =====
+  const linksEl = document.getElementById('links');
+  const filtersEl = document.getElementById('filters');
 
-      if (config.avatar) {
-        const avatarWrap = document.createElement('div');
-        avatarWrap.className = 'avatar';
-        const img = document.createElement('img');
-        img.src = config.avatar;
-        img.alt = config.name || '';
-        img.loading = 'eager';
-        avatarWrap.appendChild(img);
-        profile.appendChild(avatarWrap);
-      }
+  document.getElementById('name').textContent = config.name;
+  document.getElementById('bio').textContent = config.bio;
+  document.getElementById('avatar').src = config.avatar;
 
-      if (config.name) {
-        const name = document.createElement('div');
-        name.className = 'profile-name';
-        name.textContent = config.name;
-        profile.appendChild(name);
-      }
+  let activeFilter = 'all';
 
-      if (config.bio) {
-        const bio = document.createElement('div');
-        bio.className = 'profile-bio';
-        bio.textContent = t(config.bio, config, lang);
-        profile.appendChild(bio);
-      }
-
-      return profile;
-    }
-
-    function renderLinks(links, config, lang) {
-      const container = document.createElement('div');
-      container.className = 'links';
-
-      links.forEach(function(link, i) {
-        const a = document.createElement('a');
-        a.href = link.url;
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
-        a.className = 'link-btn animate-in';
-        a.style.animationDelay = (0.2 + i * 0.05) + 's';
-
-        const iconName = link.icon || 'link';
-        const color = ICON_COLORS[iconName] || '#fff';
-        const bg = ICON_BG[iconName] || 'rgba(255,255,255,0.1)';
-        const hoverBorder = HOVER_BORDERS[iconName];
-
-        if (hoverBorder) {
-          a.addEventListener('mouseenter', function() { a.style.borderColor = hoverBorder; });
-          a.addEventListener('mouseleave', function() { a.style.borderColor = ''; });
-        }
-
-        const iconDiv = document.createElement('div');
-        iconDiv.className = 'link-icon';
-        iconDiv.style.background = bg;
-        iconDiv.style.color = color;
-        iconDiv.innerHTML = getIconSVG(iconName);
-
-        const text = document.createElement('span');
-        text.className = 'link-text';
-        text.textContent = t(link.title, config, lang);
-
-        const arrow = document.createElement('span');
-        arrow.className = 'link-arrow';
-        arrow.innerHTML = ARROW_SVG;
-
-        a.appendChild(iconDiv);
-        a.appendChild(text);
-        a.appendChild(arrow);
-        container.appendChild(a);
+  function renderLinks() {
+    // Ordenar: los que coinciden con el filtro van primero
+    let sorted = [...config.links];
+    if (activeFilter !== 'all') {
+      sorted.sort((a, b) => {
+        const aMatch = (a.tags || []).includes(activeFilter);
+        const bMatch = (b.tags || []).includes(activeFilter);
+        if (aMatch && !bMatch) return -1;
+        if (!aMatch && bMatch) return 1;
+        return 0;
       });
-
-      return container;
     }
 
-    function renderSection(section, config, lang, startDelay) {
-      const fragment = document.createDocumentFragment();
+    linksEl.innerHTML = '';
+    sorted.forEach(link => {
+      const isHighlight = activeFilter !== 'all' && (link.tags || []).includes(activeFilter);
+      const a = document.createElement('a');
+      a.className = 'link' + (isHighlight ? ' highlight' : '');
+      a.href = link.url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.innerHTML = `
+        <div class="link-icon">${link.icon || link.name[0]}</div>
+        <div class="link-info">
+          <div class="link-title">${link.name}</div>
+          <div class="link-url">${link.url.replace(/^https?:\/\//, '')}</div>
+        </div>
+      `;
+      linksEl.appendChild(a);
+    });
+  }
 
-      const divider = document.createElement('div');
-      divider.className = 'divider';
-      fragment.appendChild(divider);
+  // ===== FILTERS =====
+  filtersEl.addEventListener('click', e => {
+    const btn = e.target.closest('.filter');
+    if (!btn) return;
+    activeFilter = btn.dataset.filter;
+    filtersEl.querySelectorAll('.filter').forEach(f => f.classList.remove('active'));
+    btn.classList.add('active');
+    renderLinks();
+  });
 
-      if (section.title) {
-        const title = document.createElement('div');
-        title.className = 'section-title';
-        title.textContent = t(section.title, config, lang);
-        fragment.appendChild(title);
-      }
+  // ===== SIDEBAR NAV =====
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+    });
+  });
 
-      if (section.type === 'grid' && section.items) {
-        const grid = document.createElement('div');
-        grid.className = 'catalog-grid';
-        grid.style.gridTemplateColumns = 'repeat(' + (section.columns || 2) + ', 1fr)';
+  renderLinks();
+</script>
 
-        section.items.forEach(function(item, i) {
-          const card = document.createElement('a');
-          card.href = item.url;
-          card.target = '_blank';
-          card.rel = 'noopener noreferrer';
-          card.className = 'catalog-card animate-in';
-          card.style.animationDelay = (startDelay + i * 0.05) + 's';
-
-          const iconName = item.icon || 'link';
-          const iconDiv = document.createElement('div');
-          iconDiv.className = 'catalog-card-icon';
-          iconDiv.style.background = ICON_BG[iconName] || 'rgba(255,255,255,0.1)';
-          iconDiv.style.color = ICON_COLORS[iconName] || '#fff';
-          iconDiv.innerHTML = getIconSVG(iconName);
-
-          const name = document.createElement('span');
-          name.className = 'catalog-card-name';
-          name.textContent = t(item.title, config, lang);
-
-          card.appendChild(iconDiv);
-          card.appendChild(name);
-
-          if (item.subtitle) {
-            const count = document.createElement('span');
-            count.className = 'catalog-card-count';
-            count.textContent = t(item.subtitle, config, lang);
-            card.appendChild(count);
-          }
-
-          grid.appendChild(card);
-        });
-
-        fragment.appendChild(grid);
-      }
-
-      return fragment;
-    }
-
-    function applyTheme(config) {
-      const style = (config.theme && config.theme.style) || 'glass';
-      if (style !== 'glass') {
-        document.body.classList.add('theme-' + style);
-      }
-      if (config.theme && config.theme.radius !== undefined) {
-        document.documentElement.style.setProperty('--radius', config.theme.radius + 'px');
-      }
-    }
-
-    function applySEO(config) {
-      if (config.seo) {
-        if (config.seo.title) {
-          document.title = config.seo.title;
-          document.querySelector('meta[property="og:title"]').content = config.seo.title;
-        }
-        if (config.seo.description) {
-          document.querySelector('meta[name="description"]').content = config.seo.description;
-          document.querySelector('meta[property="og:description"]').content = config.seo.description;
-        }
-      } else if (config.name) {
-        document.title = config.name;
-      }
-    }
-
-    async function init() {
-      try {
-        const [configRes] = await Promise.all([
-          fetch('config.json'),
-          loadIcons()
-        ]);
-        const config = await configRes.json();
-        const lang = detectLang(config);
-
-        // RTL
-        if (lang === 'ar') {
-          document.documentElement.setAttribute('dir', 'rtl');
-        }
-        if (lang) {
-          document.documentElement.lang = lang;
-        }
-
-        // Remove loading
-        document.getElementById('loading').remove();
-
-        // Background
-        renderBackground(config.background);
-
-        // Theme
-        applyTheme(config);
-
-        // SEO
-        applySEO(config);
-
-        // Container
-        const container = document.createElement('div');
-        container.className = 'container';
-
-        // Profile
-        container.appendChild(renderProfile(config, lang));
-
-        // Links
-        if (config.links && config.links.length) {
-          container.appendChild(renderLinks(config.links, config, lang));
-        }
-
-        // Sections
-        if (config.sections && config.sections.length) {
-          let delay = 0.2 + (config.links ? config.links.length * 0.05 : 0) + 0.1;
-          config.sections.forEach(function(section) {
-            container.appendChild(renderSection(section, config, lang, delay));
-            delay += (section.items ? section.items.length * 0.05 : 0) + 0.1;
-          });
-        }
-
-        document.body.appendChild(container);
-
-      } catch (e) {
-        document.getElementById('loading').textContent = 'Failed to load config.json';
-        console.error(e);
-      }
-    }
-
-    init();
-  </script>
 </body>
 </html>
