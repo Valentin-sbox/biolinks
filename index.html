@@ -140,8 +140,52 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .profile-bio { font-size: 14px; color: var(--text-2); }
 
 .flag {
+  position: relative;
+  cursor: pointer;
   font-size: 18px;
   line-height: 1;
+}
+
+.flag::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  z-index: 10;
+}
+
+.flag::before {
+  content: '';
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  border: 5px solid transparent;
+  border-top-color: var(--surface-2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  z-index: 10;
+}
+
+.flag:hover::after,
+.flag:hover::before,
+.flag:focus::after,
+.flag:focus::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 .section-title {
@@ -551,7 +595,9 @@ document.querySelectorAll('.nav-item').forEach(item => {
     item.classList.add('active');
   });
 });
-
+document.querySelector('.flag').addEventListener('click', function() {
+  this.classList.toggle('active');
+});
 document.querySelectorAll('.lang-switch button').forEach(btn => {
   btn.addEventListener('click', () => applyLang(btn.dataset.lang));
 });
