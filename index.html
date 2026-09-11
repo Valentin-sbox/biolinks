@@ -183,7 +183,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .flag:hover::after,
 .flag:hover::before,
 .flag:focus::after,
-.flag:focus::before {
+.flag:focus::before,
+.flag.active::after,
+.flag.active::before {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
@@ -232,6 +234,22 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.link[href*="github.com"] .link-icon {
+  background: #ffffff;
+  border-color: #ffffff;
+}
+.link[href*="github.com"] .link-icon img {
+  filter: none;
+}
+
+.link[href*="pixiv.net"] .link-icon {
+  background: rgba(0, 145, 234, 0.15);
+  border-color: rgba(0, 145, 234, 0.4);
+}
+.link[href*="pixiv.net"] .link-icon img {
+  filter: drop-shadow(0 0 6px rgba(0, 145, 234, 0.5));
 }
 
 .discord-bar {
@@ -422,7 +440,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
         <div class="profile-info">
           <div class="profile-name">
             <span id="name">Valentinhere1</span>
-            <span class="flag">🇦🇷</span>
+            <span class="flag" data-tooltip="El mejor país del mundo">🇦🇷</span>
           </div>
           <div class="profile-bio" id="bio" data-i18n="bio">Web developer · Escritor · ArtWorks</div>
         </div>
@@ -436,7 +454,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       <section id="sobre-mi">
         <div class="section-title" data-i18n="section.sobre">Sobre mí</div>
         <p style="font-size:14px; color:var(--text-2); line-height:1.6;" data-i18n="sobre.texto">
-          Web developer con enfoque en PHP, JS y CSS. Escribo historias y dibujo como hobby.
+          Hago webs con PHP, JS y CSS. Cuando no estoy programando, escribo historias y dibujo lo que se me ocurre.
         </p>
       </section>
 
@@ -445,7 +463,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
         <div class="links" id="links"></div>
       </section>
 
-      <a class="discord-bar" href="https://discord.gg/tu-invitacion" target="_blank" rel="noopener noreferrer">
+      <a class="discord-bar" href="https://discord.gg/253ByDH9ds" target="_blank" rel="noopener noreferrer">
         <img src="https://cdn.simpleicons.org/discord" alt="Discord">
         <span data-i18n="discord.texto">Unite a mi Discord</span>
       </a>
@@ -493,7 +511,7 @@ const i18n = {
     "nav.comunidad": "Comunidad",
     "bio": "Web developer · Escritor · ArtWorks",
     "section.sobre": "Sobre mí",
-    "sobre.texto": "Web developer con enfoque en PHP, JS y CSS. Escribo historias y dibujo como hobby.",
+    "sobre.texto": "Hago webs con PHP, JS y CSS. Cuando no estoy programando, escribo historias y dibujo lo que se me ocurre.",
     "section.redes": "Redes sociales",
     "discord.texto": "Unite a mi Discord"
   },
@@ -506,7 +524,7 @@ const i18n = {
     "nav.comunidad": "Community",
     "bio": "Web developer · Writer · ArtWorks",
     "section.sobre": "About me",
-    "sobre.texto": "Web developer focused on PHP, JS and CSS. I write stories and draw as a hobby.",
+    "sobre.texto": "I build websites with PHP, JS and CSS. When I'm not coding, I write stories and draw whatever comes to mind.",
     "section.redes": "Social media",
     "discord.texto": "Join my Discord"
   }
@@ -595,9 +613,11 @@ document.querySelectorAll('.nav-item').forEach(item => {
     item.classList.add('active');
   });
 });
+
 document.querySelector('.flag').addEventListener('click', function() {
   this.classList.toggle('active');
 });
+
 document.querySelectorAll('.lang-switch button').forEach(btn => {
   btn.addEventListener('click', () => applyLang(btn.dataset.lang));
 });
