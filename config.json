@@ -1,116 +1,12 @@
 {
-  "name": "REDLINE",
-  "bio": "Erkek giyim markası",
-  "avatar": "assets/avatar.png",
-  "background": {
-    "type": "image",
-    "src": "assets/bg.gif",
-    "overlay": 0.55
-  },
-  "theme": {
-    "style": "glass",
-    "radius": 16
-  },
+  "name": "Valentin SBX",
+  "bio": "Dev · Dibujo · Escribo xd",
+  "avatar": "https://github.com/Valentin-sbox.png",
   "links": [
-    {
-      "title": "WhatsApp",
-      "url": "https://api.whatsapp.com/send?phone=905301640012",
-      "icon": "whatsapp"
-    },
-    {
-      "title": "Telegram Group",
-      "url": "https://t.me/redlinemen",
-      "icon": "telegram"
-    },
-    {
-      "title": "Instagram",
-      "url": "https://www.instagram.com/redline.officially/",
-      "icon": "instagram"
-    }
-  ],
-  "sections": [
-    {
-      "title": "WhatsApp Katalog",
-      "type": "grid",
-      "columns": 2,
-      "items": [
-        {
-          "title": "Hepsini Gönder",
-          "subtitle": "49 foto",
-          "url": "https://wa.me/905301640012?text=%23hepsi",
-          "icon": "send"
-        },
-        {
-          "title": "Slim Fit",
-          "subtitle": "26 foto",
-          "url": "https://wa.me/905301640012?text=%23slimfit",
-          "icon": "image"
-        },
-        {
-          "title": "Oversize",
-          "subtitle": "17 foto",
-          "url": "https://wa.me/905301640012?text=%23oversize",
-          "icon": "image"
-        },
-        {
-          "title": "Pants",
-          "subtitle": "5 foto",
-          "url": "https://wa.me/905301640012?text=%23pants",
-          "icon": "image"
-        },
-        {
-          "title": "Adres",
-          "subtitle": "1 foto",
-          "url": "https://wa.me/905301640012?text=%23adress",
-          "icon": "location"
-        }
-      ]
-    }
-  ],
-  "seo": {
-    "title": "REDLINE - Links",
-    "description": "REDLINE - Erkek giyim markası. WhatsApp, Instagram, Telegram ve daha fazlası."
-  },
-  "i18n": {
-    "enabled": true,
-    "default": "tr",
-    "translations": {
-      "tr": {
-        "WhatsApp": "WhatsApp",
-        "Telegram Group": "Telegram Grup",
-        "Instagram": "Instagram",
-        "WhatsApp Katalog": "WhatsApp Katalog",
-        "Hepsini Gönder": "Hepsini Gönder",
-        "Pants": "Pantolon",
-        "Adres": "Adres"
-      },
-      "en": {
-        "WhatsApp": "WhatsApp",
-        "Telegram Group": "Telegram Group",
-        "Instagram": "Instagram",
-        "WhatsApp Katalog": "WhatsApp Catalog",
-        "Hepsini Gönder": "Send All",
-        "Pants": "Pants",
-        "Adres": "Address"
-      },
-      "ru": {
-        "WhatsApp": "WhatsApp",
-        "Telegram Group": "Telegram Группа",
-        "Instagram": "Instagram",
-        "WhatsApp Katalog": "WhatsApp Каталог",
-        "Hepsini Gönder": "Отправить все",
-        "Pants": "Брюки",
-        "Adres": "Адрес"
-      },
-      "ar": {
-        "WhatsApp": "واتساب",
-        "Telegram Group": "مجموعة تيليغرام",
-        "Instagram": "انستغرام",
-        "WhatsApp Katalog": "كتالوج واتساب",
-        "Hepsini Gönder": "ارسال الكل",
-        "Pants": "بناطيل",
-        "Adres": "العنوان"
-      }
-    }
-  }
+    { "name": "Pixiv", "url": "https://www.pixiv.net/en/users/91075371" },
+    { "name": "Instagram", "url": "https://www.instagram.com/valentinhere1/" },
+    { "name": "ArtStation", "url": "https://valentinhere.artstation.com" },
+    { "name": "GitHub", "url": "https://github.com/Valentin-sbox" },
+    { "name": "Discord", "url": "https://discord.gg/tu-invitacion" }
+  ]
 }
