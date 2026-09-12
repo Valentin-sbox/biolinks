@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valentinhere1</title>
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="shortcut icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -41,74 +41,10 @@ a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
 
 .app {
-  display: grid;
-  grid-template-columns: 240px 1fr;
-  gap: 24px;
-  max-width: 1100px;
+  max-width: 680px;
   margin: 0 auto;
   padding: 32px 24px;
   min-height: 100vh;
-}
-
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  height: fit-content;
-  position: sticky;
-  top: 32px;
-}
-.nav-group { display: flex; flex-direction: column; gap: 4px; }
-.nav-title {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: var(--text-3);
-  margin-bottom: 6px;
-  padding-left: 10px;
-}
-.nav-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 10px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-2);
-  transition: all 0.15s;
-  text-align: left;
-  width: 100%;
-}
-.nav-item:hover { background: var(--surface); color: var(--text); }
-.nav-item.active { background: var(--surface); color: var(--text); }
-.nav-item .dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--text-3);
-  flex-shrink: 0;
-}
-.nav-item.active .dot { background: var(--accent); }
-.nav-item .label { flex: 1; }
-.nav-item .badge {
-  font-size: 10px;
-  font-weight: 600;
-  padding: 2px 6px;
-  border-radius: 4px;
-  background: var(--surface-2);
-  color: var(--text-3);
-  border: 1px solid var(--border);
-}
-.nav-item .badge.warn {
-  color: #f59e0b;
-  border-color: rgba(245, 158, 11, 0.3);
-  background: rgba(245, 158, 11, 0.08);
-}
-.sidebar-divider {
-  height: 1px;
-  background: var(--border);
-  margin: 4px 0;
 }
 
 .main {
@@ -143,6 +79,123 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   gap: 8px;
 }
 .profile-bio { font-size: 14px; color: var(--text-2); }
+
+/* Acciones en la misma fila del Perfil (PC / Tablet) */
+.profile-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.nav-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-2);
+  transition: all 0.15s;
+}
+.nav-icon-btn:hover, .nav-icon-btn.active {
+  background: var(--surface-2);
+  color: var(--text);
+  border-color: var(--border-hover);
+}
+.nav-icon-btn svg { width: 18px; height: 18px; }
+
+.lang-btn {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0 10px;
+  height: 38px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-2);
+  transition: all 0.15s;
+}
+.lang-btn:hover {
+  background: var(--surface-2);
+  color: var(--text);
+  border-color: var(--border-hover);
+}
+
+/* Botón y Menú Desplegable flotante en Mobile */
+.profile-actions-dropdown {
+  display: none;
+  position: relative;
+}
+
+.more-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.more-btn:hover, .more-btn.active {
+  background: var(--surface-2);
+  color: var(--text);
+  border-color: var(--border-hover);
+}
+.more-btn svg { width: 20px; height: 20px; }
+
+.more-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  z-index: 1000;
+  min-width: 180px;
+  padding: 6px 0;
+}
+.more-menu.active {
+  display: block;
+}
+
+.more-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  color: var(--text-2);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s;
+  width: 100%;
+  text-align: left;
+}
+.more-item:hover, .more-item.active {
+  background: var(--surface-2);
+  color: var(--text);
+}
+.more-item svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.menu-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 4px 0;
+}
 
 .flag {
   position: relative;
@@ -245,16 +298,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   background: #ffffff;
   border-color: #ffffff;
 }
-.link[href*="github.com"] .link-icon img {
-  filter: none;
-}
 
-.link[href*="pixiv.net"] .link-icon {
-  background: rgba(0, 145, 234, 0.15);
-  border-color: rgba(0, 145, 234, 0.4);
-}
-.link[href*="pixiv.net"] .link-icon img {
-  filter: drop-shadow(0 0 6px rgba(0, 145, 234, 0.5));
+/* Destacado plano 2D para Pixiv */
+.link[href*="pixiv.net"] {
+  border: 2px solid #0091ea;
 }
 
 .discord-bar {
@@ -274,112 +321,66 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .discord-bar:hover { border-color: var(--border-hover); background: var(--surface-2); color: var(--text); }
 .discord-bar img { width: 20px; height: 20px; display: block; }
 
-.hamburger {
-  display: none;
-  width: 40px; height: 40px;
-  border-radius: 10px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 4px;
-  flex-shrink: 0;
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
 }
-.hamburger span {
-  display: block;
-  width: 18px; height: 2px;
-  background: var(--text);
-  border-radius: 2px;
-  transition: all 0.2s;
-}
-.hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-.hamburger.open span:nth-child(2) { opacity: 0; }
-.hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-
-.sidebar-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  z-index: 90;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-.sidebar-overlay.active { opacity: 1; display: block; }
-
-.page {
+.project-card {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-}
-
-.content {
-  flex: 1;
-}
-
-.footer {
-  width: 100%;
-  border-top: 1px solid var(--border);
-  padding: 20px 24px;
-  margin-top: 32px;
-  display: flex;
-  align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-  font-size: 12px;
-  color: var(--text-3);
-  max-width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.footer-left { display: flex; align-items: center; gap: 12px; }
-.footer-right { display: flex; align-items: center; gap: 8px; }
-
-.lang-switch {
-  display: flex;
-  gap: 4px;
-}
-.lang-switch button {
-  font-size: 11px;
-  font-weight: 600;
-  padding: 4px 8px;
-  border-radius: 6px;
+  padding: 16px;
   border: 1px solid var(--border);
-  color: var(--text-3);
+  border-radius: var(--radius);
+  background: var(--surface);
   transition: all 0.15s;
 }
-.lang-switch button.active {
-  color: var(--text);
-  border-color: var(--accent);
-  background: rgba(139, 92, 246, 0.1);
+.project-card:hover { border-color: var(--border-hover); background: var(--surface-2); }
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+.project-title { font-size: 15px; font-weight: 700; color: var(--text); }
+.project-desc { font-size: 13px; color: var(--text-2); line-height: 1.4; margin-bottom: 12px; }
+.project-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  width: fit-content;
+}
+.project-tag.activo {
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  background: rgba(16, 185, 129, 0.08);
+}
+.project-tag.paused, .project-tag.Paused {
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  background: rgba(245, 158, 11, 0.08);
+}
+.project-tag.finalizado {
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  background: rgba(59, 130, 246, 0.08);
 }
 
 @media (max-width: 780px) {
   .app {
-    grid-template-columns: 1fr;
-    padding: 24px 16px 24px;
-    gap: 20px;
+    padding: 24px 16px;
   }
-  .hamburger { display: flex; }
-  .sidebar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 260px;
-    height: 100vh;
-    background: var(--bg);
-    border-left: 1px solid var(--border);
-    padding: 64px 16px 24px;
-    z-index: 95;
-    transform: translateX(100%);
-    transition: transform 0.25s ease;
-    overflow-y: auto;
-  }
-  .sidebar.open { transform: translateX(0); }
+  
+  .profile-actions { display: none; }
+  .profile-actions-dropdown { display: block; }
+
   .links { grid-template-columns: repeat(2, 1fr); }
+  .projects-grid { grid-template-columns: repeat(1, 1fr); }
+  
   .link {
     flex-direction: column;
     gap: 6px;
@@ -409,38 +410,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
   <div class="app content">
 
-    <aside class="sidebar" id="sidebar">
-      <div class="nav-group">
-        <div class="nav-title" data-i18n="nav.inicio">Inicio</div>
-        <a class="nav-item active" href="#inicio">
-          <span class="dot"></span>
-          <span class="label" data-i18n="nav.inicio">Inicio</span>
-        </a>
-        <a class="nav-item" href="#sobre-mi">
-          <span class="dot"></span>
-          <span class="label" data-i18n="nav.sobre">Sobre mí</span>
-        </a>
-        <a class="nav-item" href="#redes">
-          <span class="dot"></span>
-          <span class="label" data-i18n="nav.redes">Redes sociales</span>
-        </a>
-      </div>
-
-      <div class="nav-group">
-        <div class="nav-title" data-i18n="nav.proyectos">Mis proyectos</div>
-        <button class="nav-item">
-          <span class="dot"></span>
-          <span class="label" data-i18n="nav.proyectos">Proyectos</span>
-          <span class="badge warn" data-i18n="nav.mantenimiento">Mantenimiento</span>
-        </button>
-      </div>
-    </aside>
-
     <main class="main">
 
+      <!-- Sección Perfil Fija (visible en Inicio y Proyectos) -->
       <section id="inicio" class="profile">
         <div class="avatar">
-          <img src="favicon.svg " alt="Valentinhere1" id="avatar">
+          <img src="favicon.svg" alt="Valentinhere1" id="avatar">
         </div>
         <div class="profile-info">
           <div class="profile-name">
@@ -449,49 +424,79 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
           </div>
           <div class="profile-bio" id="bio" data-i18n="bio">Web developer · Escritor · ArtWorks</div>
         </div>
-        <button class="hamburger" id="hamburger" aria-label="Menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+
+        <!-- Acciones en línea para PC -->
+        <div class="profile-actions">
+          <button class="nav-icon-btn active" id="btn-home" data-section="main" title="Inicio">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </button>
+          <button class="nav-icon-btn" id="btn-projects" data-section="projects" title="Proyectos">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 8 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2z"/></svg>
+          </button>
+          <a class="nav-icon-btn" href="https://github.com/Valentin-sbox/biolinks/" target="_blank" rel="noopener noreferrer" title="GitHub Repo">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
+          <button class="lang-btn" id="lang-btn">EN</button>
+        </div>
+
+        <!-- Botón único y Menú desplegable flotante para Mobile -->
+        <div class="profile-actions-dropdown">
+          <button class="more-btn" id="more-btn" title="Menú">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+          </button>
+          <div class="more-menu" id="more-menu">
+            <button class="more-item active" data-section="main">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              <span data-i18n="nav.inicio">Inicio</span>
+            </button>
+            <button class="more-item" data-section="projects">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 8 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2z"/></svg>
+              <span data-i18n="nav.proyectos">Proyectos</span>
+            </button>
+            <div class="menu-divider"></div>
+            <a class="more-item" href="https://github.com/Valentin-sbox/biolinks/" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              <span>GitHub Repo</span>
+            </a>
+            <button class="more-item" id="mobile-lang-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              <span id="mobile-lang-label">Idioma: EN</span>
+            </button>
+          </div>
+        </div>
       </section>
 
-      <section id="sobre-mi">
-        <div class="section-title" data-i18n="section.sobre">Sobre mí</div>
-        <p style="font-size:14px; color:var(--text-2); line-height:1.6;" data-i18n="sobre.texto">
-          Hago webs con PHP, JS y CSS. Cuando no estoy programando, escribo historias y dibujo lo que se me ocurre.
-        </p>
-      </section>
+      <!-- Vista de Inicio (Sobre mí, Redes, Discord) -->
+      <div id="main-content" style="display: flex; flex-direction: column; gap: 32px;">
+        <section id="sobre-mi">
+          <div class="section-title" data-i18n="section.sobre">Sobre mí</div>
+          <p style="font-size:14px; color:var(--text-2); line-height:1.6;" data-i18n="sobre.texto">
+            Hago webs con PHP, JS y CSS. Cuando no estoy programando, escribo historias y dibujo lo que se me ocurre.
+          </p>
+        </section>
 
-      <section id="redes">
-        <div class="section-title" data-i18n="section.redes">Redes sociales</div>
-        <div class="links" id="links"></div>
-      </section>
+        <section id="redes">
+          <div class="section-title" data-i18n="section.redes">Redes sociales</div>
+          <div class="links" id="links"></div>
+        </section>
 
-      <a class="discord-bar" href="https://discord.gg/253ByDH9ds" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn.simpleicons.org/discord" alt="Discord">
-        <span data-i18n="discord.texto">Unite a mi Discord</span>
-      </a>
+        <a class="discord-bar" href="https://discord.gg/253ByDH9ds" target="_blank" rel="noopener noreferrer">
+          <img src="https://cdn.simpleicons.org/discord" alt="Discord">
+          <span data-i18n="discord.texto">Unite a mi Discord</span>
+        </a>
+      </div>
+
+      <!-- Vista de Proyectos -->
+      <div id="projects-content" style="display: none; flex-direction: column; gap: 24px;">
+        <div class="section-title" data-i18n="nav.proyectos">Mis proyectos</div>
+        <div class="projects-grid" id="projects-grid"></div>
+      </div>
 
     </main>
 
   </div>
 
-  <footer class="footer">
-    <div class="footer-left">
-      <span>© 2026 Valentinhere1</span>
-    </div>
-    <div class="footer-right">
-      <div class="lang-switch">
-        <button data-lang="es" class="active">ES</button>
-        <button data-lang="en">EN</button>
-      </div>
-    </div>
-  </footer>
-
 </div>
-
-<div class="sidebar-overlay" id="overlay"></div>
 
 <script>
 const config = {
@@ -502,7 +507,17 @@ const config = {
     { name: "Pixiv", url: "https://www.pixiv.net/en/users/91075371", icon: "pixiv" },
     { name: "Instagram", url: "https://www.instagram.com/valentinhere1/", icon: "instagram" },
     { name: "ArtStation", url: "https://valentinhere1.artstation.com", icon: "artstation" },
-    { name: "GitHub", url: "https://github.com/Valentin-sbox", icon: "github" }
+    { name: "GitHub", url: "https://github.com/Valentin-sbox", icon: "github" },
+    { name: "Tapas", url: "https://tapas.io/valentinhere1", icon: "tapas" }
+  ],
+  projects: [
+    {
+      title: "La aventura antes del caos (novela)",
+      type: "Novela Web",
+      status: "Paused",
+      url: "https://tapas.io/series/La-Aventura-antes-del-caos/info",
+      desc: "En un universo creado por Origen, un dios omnipotente que anhelaba algo que nunca podría tener. Nuestra protagonista nace de ese anhelo en un mundo envuelto en caos..."
+    }
   ]
 };
 
@@ -512,26 +527,30 @@ const i18n = {
     "nav.sobre": "Sobre mí",
     "nav.redes": "Redes sociales",
     "nav.proyectos": "Mis proyectos",
-    "nav.mantenimiento": "Mantenimiento",
     "nav.comunidad": "Comunidad",
     "bio": "Web developer · Escritor · ArtWorks",
     "section.sobre": "Sobre mí",
     "sobre.texto": "Hago webs con PHP, JS y CSS. Cuando no estoy programando, escribo historias y dibujo lo que se me ocurre.",
     "section.redes": "Redes sociales",
-    "discord.texto": "Unite a mi Discord"
+    "discord.texto": "Unite a mi Discord",
+    "status.activo": "Activo",
+    "status.paused": "Pausado",
+    "status.finalizado": "Finalizado"
   },
   en: {
     "nav.inicio": "Home",
     "nav.sobre": "About me",
     "nav.redes": "Social media",
     "nav.proyectos": "My projects",
-    "nav.mantenimiento": "Maintenance",
     "nav.comunidad": "Community",
     "bio": "Web developer · Writer · ArtWorks",
     "section.sobre": "About me",
     "sobre.texto": "I build websites with PHP, JS and CSS. When I'm not coding, I write stories and draw whatever comes to mind.",
     "section.redes": "Social media",
-    "discord.texto": "Join my Discord"
+    "discord.texto": "Join my Discord",
+    "status.activo": "Active",
+    "status.paused": "Paused",
+    "status.finalizado": "Finished"
   }
 };
 
@@ -557,14 +576,26 @@ function applyLang(lang) {
       el.textContent = i18n[lang][key];
     }
   });
-  document.querySelectorAll('.lang-switch button').forEach(b => {
-    b.classList.toggle('active', b.dataset.lang === lang);
-  });
+  
+  const langBtn = document.getElementById('lang-btn');
+  if (langBtn) {
+    langBtn.textContent = lang === 'es' ? 'EN' : 'ES';
+  }
+
+  const mobileLangLabel = document.getElementById('mobile-lang-label');
+  if (mobileLangLabel) {
+    mobileLangLabel.textContent = `Idioma: ${lang === 'es' ? 'EN' : 'ES'}`;
+  }
+  
+  renderProjects();
 }
 
 const ICON_CDN = "https://cdn.simpleicons.org/";
 
 function getIcon(name) {
+  if (name === "tapas") {
+    return `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.8L19.2 8 12 11.2 4.8 8 12 4.8zM4 9.6l7 3.1v6.9l-7-3.5V9.6zm16 6.5l-7 3.5v-6.9l7-3.1v6.5z"/></svg>`;
+  }
   return `<img src="${ICON_CDN}${name}" alt="${name}" loading="lazy">`;
 }
 
@@ -593,38 +624,93 @@ function renderLinks() {
   });
 }
 
-renderLinks();
+const projectsGrid = document.getElementById('projects-grid');
 
-const hamburger = document.getElementById('hamburger');
-const sidebar = document.getElementById('sidebar');
-const overlay = document.getElementById('overlay');
-
-function toggleMenu() {
-  hamburger.classList.toggle('open');
-  sidebar.classList.toggle('open');
-  overlay.classList.toggle('active');
+function renderProjects() {
+  projectsGrid.innerHTML = '';
+  config.projects.forEach(project => {
+    const statusKey = project.status.toLowerCase();
+    const statusText = i18n[currentLang][`status.${statusKey}`] || project.status;
+    const card = document.createElement('a');
+    card.className = 'project-card';
+    card.href = project.url;
+    card.target = '_blank';
+    card.rel = 'noopener noreferrer';
+    card.innerHTML = `
+      <div>
+        <div class="project-header">
+          <div class="project-title">${project.title}</div>
+        </div>
+        <div class="project-desc">${project.desc}</div>
+      </div>
+      <span class="project-tag ${statusKey}">${statusText}</span>
+    `;
+    projectsGrid.appendChild(card);
+  });
 }
 
-hamburger.addEventListener('click', toggleMenu);
-overlay.addEventListener('click', toggleMenu);
+renderLinks();
+renderProjects();
 
-document.querySelectorAll('.nav-item').forEach(item => {
-  item.addEventListener('click', () => {
-    if (window.innerWidth <= 780 && sidebar.classList.contains('open')) {
-      toggleMenu();
-    }
-    if (!item.getAttribute('href')) return;
-    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-    item.classList.add('active');
+const mainContent = document.getElementById('main-content');
+const projectsContent = document.getElementById('projects-content');
+
+function showSection(section) {
+  if (section === 'projects') {
+    mainContent.style.display = 'none';
+    projectsContent.style.display = 'flex';
+  } else {
+    mainContent.style.display = 'flex';
+    projectsContent.style.display = 'none';
+  }
+
+  // Actualizar estado activo en botones desktop y mobile
+  document.querySelectorAll('[data-section]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.section === section);
   });
+}
+
+// Eventos de navegación en Desktop y Mobile
+document.querySelectorAll('[data-section]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    showSection(btn.dataset.section);
+    moreMenu.classList.remove('active');
+    moreBtn.classList.remove('active');
+  });
+});
+
+// Control del Menú Desplegable Flotante en Mobile
+const moreBtn = document.getElementById('more-btn');
+const moreMenu = document.getElementById('more-menu');
+
+moreBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  moreMenu.classList.toggle('active');
+  moreBtn.classList.toggle('active');
+});
+
+document.addEventListener('click', (e) => {
+  if (!moreMenu.contains(e.target) && !moreBtn.contains(e.target)) {
+    moreMenu.classList.remove('active');
+    moreBtn.classList.remove('active');
+  }
 });
 
 document.querySelector('.flag').addEventListener('click', function() {
   this.classList.toggle('active');
 });
 
-document.querySelectorAll('.lang-switch button').forEach(btn => {
-  btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+// Eventos de cambio de idioma (Desktop y Mobile)
+const toggleLang = () => {
+  const nextLang = currentLang === 'es' ? 'en' : 'es';
+  applyLang(nextLang);
+};
+
+document.getElementById('lang-btn').addEventListener('click', toggleLang);
+document.getElementById('mobile-lang-btn').addEventListener('click', () => {
+  toggleLang();
+  moreMenu.classList.remove('active');
+  moreBtn.classList.remove('active');
 });
 
 applyLang(currentLang);
